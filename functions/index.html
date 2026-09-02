@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+</head>
+<body>
+    <h1>Inscription</h1>
+    
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" required>
+        <button id="submit" type="submit">Inscription</button> 
+        <p id="status"></p>
+
+        
+        <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBjDbEIGhOkpUdh_vEBk-Nf8M7oFWJ8PBI",
+    authDomain: "gdg-lome-workshop.firebaseapp.com",
+    projectId: "gdg-lome-workshop",
+    storageBucket: "gdg-lome-workshop.firebasestorage.app",
+    messagingSenderId: "1054947915727",
+    appId: "1:1054947915727:web:1caa16eb94caa916ebc4ba"
+  };
+
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+         const app = initializeApp(firebaseConfig); 
+         const auth = getAuth(app); 
+
+         const submitButton = document.getElementById("submit");
+         const statusText = document.getElementById("status"); 
+
+         submitButton.addEventListener("click", async (event) => {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            statusText.innerText = "Création du compte en cours...";
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                statusText.innerText = `Erreur: ${error.message}`;
+            }
+         });
+        </script>
+
+
+
+</body>
+</html>
